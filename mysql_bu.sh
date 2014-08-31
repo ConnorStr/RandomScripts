@@ -1,5 +1,8 @@
 #!/bin/sh
 # Database Backup Script
+# Written by J. Connor
+#
+# J. Connor is not responsible for any action of this script, use with care.
 
 # Date format
 DATE=`date +%m-%d-%Y_%H-%M`
