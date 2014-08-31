@@ -26,7 +26,7 @@ databases=`/usr/bin/mysql -u $MUSER -p$MPASS -e "SHOW DATABASES;" | grep -Ev "(D
 
 for db in $databases; do
 
-		DBFILE= "$TDIR/data/$db.gz"
+		DBFILE="$TDIR/data/$db.gz"
 
         echo "Dumping $db"
         /usr/bin/mysqldump --force --opt --user=$MUSER -p$MPASS --databases $db | gzip > $DBFILE
