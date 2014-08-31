@@ -15,8 +15,7 @@ MUSER="backup"
 MPASS=""
 
 # DO NOT EDIT BELOW THIS LINE (UNLESS YOU KNOW WHAT YOU ARE DOING)
-DB= "$TDIR/data/$db.gz"
- 
+
 #announce start
 echo "Starting Database Backup!"
 mkdir $TDIR
@@ -26,8 +25,11 @@ echo "Dumping Databases...."
 databases=`/usr/bin/mysql -u $MUSER -p$MPASS -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema)"`
 
 for db in $databases; do
+
+		DBFILE= "$TDIR/data/$db.gz"
+
         echo "Dumping $db"
-        /usr/bin/mysqldump --force --opt --user=$MUSER -p$MPASS --databases $db | gzip > $DB
+        /usr/bin/mysqldump --force --opt --user=$MUSER -p$MPASS --databases $db | gzip > $DBFILE
         echo "Finished $db"
 done
 
