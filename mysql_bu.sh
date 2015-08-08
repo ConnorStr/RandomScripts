@@ -44,9 +44,7 @@ printf "Dumping Databases....\r\n"
 databases=`/usr/bin/mysql -u $MUSER -p$MPASS -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema)"`
 
 for db in $databases; do
-
 		DBFILE="$TDIR/data/$db.gz"
-
         printf "Dumping $db\r\n"
         /usr/bin/mysqldump --force --opt --user=$MUSER -p$MPASS --databases $db | gzip > $DBFILE
         printf "Finished $db\r\n"
