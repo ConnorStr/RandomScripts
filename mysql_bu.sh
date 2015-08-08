@@ -21,7 +21,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # Date format
 DATE=`date +%m-%d-%Y_%H-%M`
 # Backup Directory (Where you want to backup to)
