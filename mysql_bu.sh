@@ -20,10 +20,9 @@ MPASS=""
 # DO NOT EDIT BELOW THIS LINE (UNLESS YOU KNOW WHAT YOU ARE DOING)
 
 #announce start
-echo "Starting Database Backup!"
-mkdir $TDIR
-mkdir $TDIR/data
-echo "Dumping Databases...."
+printf "Starting Database Backup!\r\n"
+mkdir -p $TDIR/data
+printf "Dumping Databases....\r\n"
 
 databases=`/usr/bin/mysql -u $MUSER -p$MPASS -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema)"`
 
@@ -31,23 +30,23 @@ for db in $databases; do
 
 		DBFILE="$TDIR/data/$db.gz"
 
-        echo "Dumping $db"
+        printf "Dumping $db\r\n"
         /usr/bin/mysqldump --force --opt --user=$MUSER -p$MPASS --databases $db | gzip > $DBFILE
-        echo "Finished $db"
+        printf "Finished $db\r\n"
 done
 
-echo "Creating Archive...."
+printf "Creating Archive....\r\n"
 cd $TDIR
 tar -cjf $TDIR/$DATE.archive.tar.bz2 data
 if [ "$?" -eq "0" ]; then
-        echo "Archive Compressed."
+        printf "Archive Compressed.\r\n"
 else
-        echo "Backup Failed!"
+        printf "Backup Failed!\r\n"
         exit 1
 fi
-echo "Starting Move of Archive to $BDIR"
+printf "Starting Move of Archive to $BDIR\r\n"
 mv $TDIR/$DATE.archive.tar.bz2 $BDIR/
 rm -rf $TDIR
-echo "Move Completed!"
-echo "Backup Completed!"
+printf "Move Completed!\r\n"
+printf "Backup Completed!\r\n"
 exit 0;
